@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>library | Module Safari</title>
+	<atom:link href="http://35.245.164.103/tag/library/feed/" rel="self" type="application/rss+xml" />
+	<link>http://35.245.164.103</link>
+	<description>development simplified</description>
+	<lastBuildDate>Mon, 02 Dec 2019 03:25:55 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>http://35.245.164.103/wp-content/uploads/2019/11/favivon.ico</url>
+	<title>library | Module Safari</title>
+	<link>http://35.245.164.103</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Logrus; a structured logger for Go</title>
+		<link>http://35.245.164.103/logrus/</link>
+					<comments>http://35.245.164.103/logrus/#respond</comments>
+		
+		<dc:creator><![CDATA[Nathaniel Blakely]]></dc:creator>
+		<pubDate>Tue, 26 Nov 2019 03:33:36 +0000</pubDate>
+				<category><![CDATA[Golang]]></category>
+		<category><![CDATA[golang]]></category>
+		<category><![CDATA[library]]></category>
+		<category><![CDATA[logging]]></category>
+		<category><![CDATA[logrus]]></category>
+		<guid isPermaLink="false">http://35.245.164.103/?p=305</guid>
+
+					<description><![CDATA[<p>The post <a rel="nofollow" href="http://35.245.164.103/logrus/">Logrus; a structured logger for Go</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+
+
+<div class="et_pb_section et_pb_section_0 et_section_regular" >
+				
+				
+				
+				
+					<div class="et_pb_row et_pb_row_0">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_0  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><p> Logrus is a structured logger for Golang, which offers modularity, flexibility, and compatibility (<a href="https://github.com/sirupsen/logrus">github</a>). Most projects can switch over to using logrus with a single Linux command. With an incredibly small learning curve and a plethora of extensions, logrus could be the right choice for your project.</p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_1">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><h2>Hello World</h2>
+<p>Logrus is one of the easiest hello world&#8217;s you can find, here it is, in a basically a single line of code.</p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_2">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_2  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><pre>
+package main
+
+import(
+	"github.com/sirupsen/logrus"
+)
+
+func main(){
+	logrus.WithFields(logrus.Fields{
+        	"foo":"bar"}).Info("hello world")
+}
+
+</pre></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_3">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_3  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_3  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><h2> Injection </h2>
+One of the places where logrus shines the brightest is its ability to be swapped into a codebase. You can easily change the global logger, which can be optimal for older, large codebases, since injecting a logger would not be reasonable. </div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_4">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_4  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_4  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><pre>
+package main
+
+import (
+	log "github.com/sirupsen/logrus"
+)
+
+type msFormater struct{}
+
+func (mf msFormater) Format(entry *log.Entry) ([]byte, error) {
+	entry.Data["module"] = "safari"
+
+	formatter := log.TextFormatter{}
+	return formatter.Format(entry)
+}
+
+func main() {
+	log.SetFormatter(msFormater{})
+	log.SetLevel(log.DebugLevel)
+	log.Info("hello")
+}
+</pre></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_5">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_5  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_5  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><h2>Benchmark</h2>
+<p class="blog">While Logrus offers significantly more features than the built-in log package, it is also important to take performance into account. For this benchmark, I will be testing 4 logging cases: large string,  map, map with small members, and large string with caller reporting. The code used for this benchmark can be found <a href="https://github.com/moduledemos/logrus-demo">here</a>.</p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_6">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_6  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_6  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><pre>BenchmarkLogrus-16                   	  358696      3222 ns/op
+BenchmarkLog-16                      	 4048160       330 ns/op
+BenchmarkLogrusMap-16                	  331330      3523 ns/op
+BenchmarkLogMap-16                   	  638674      2005 ns/op
+BenchmarkLogrusMapSmallMembers-16    	  326095      3625 ns/op
+BenchmarkLogMapSmallMembers-16       	  624159      1935 ns/op
+BenchmarkLogrusCallerReport-16       	  181448      6657 ns/op
+BenchmarkLogCallerReport-16          	 1246078      1024 ns/op
+</pre></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_7">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_7  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_7  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><p class="blog">The built-in log parser was able to beat out logrus by a factor of 10:1 when it comes to logging pure text via the <code>Print</code> function call. As the complexity increases, Logrus gains traction against the build-in package. When logging a map, Logrus managed to get all the way down to a 1.75:1 ratio. Now, I wonder if Logrus would be able to beat out the default logger if we leverage this to its advantage. So, I put it in the most minimal mode I could find, and then ran it on a map with 1000 members. </p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_8">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_8  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_8  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><pre>BenchmarkLogrusBestCase-16           	    1518    759788 ns/op
+BenchmarkLogBestCase-16              	    1750    683142 ns/op
+</pre></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_9">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_9  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_9  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><p class="blog"> Sadly, it seems like the default logger will always have a slight performance advantage over Logrus. The best result I was able to produce was a 1.1:1.0 ratio, which isn&#8217;t bad. However, this was done under very artificial conditions, having all of the features disabled. From the results, it is fairly safe to say that the difference in performance mainly results from the extra bells and whistles provided by the library. </p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row --><div class="et_pb_row et_pb_row_10">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_10  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_10  et_pb_text_align_left et_pb_bg_layout_light">
+				
+				
+				<div class="et_pb_text_inner"><p class="blog">Personally, despite the extra overhead, I have found the additional features to be incredibly useful. Pluggable formatting makes it extremely easy to be compliant with any log analysis platform. Additionally, the ability to have different verbosity levels is incredibly helpful for reducing the cost of your log ingestion pipeline.  </p></div>
+			</div> <!-- .et_pb_text -->
+			</div> <!-- .et_pb_column -->
+				
+				
+			</div> <!-- .et_pb_row -->
+				
+				
+			</div> <!-- .et_pb_section -->
+
+
+<p>The post <a rel="nofollow" href="http://35.245.164.103/logrus/">Logrus; a structured logger for Go</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://35.245.164.103/logrus/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

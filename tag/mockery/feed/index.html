@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>mockery | Module Safari</title>
+	<atom:link href="http://35.245.164.103/tag/mockery/feed/" rel="self" type="application/rss+xml" />
+	<link>http://35.245.164.103</link>
+	<description>development simplified</description>
+	<lastBuildDate>Sat, 07 Dec 2019 02:28:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>http://35.245.164.103/wp-content/uploads/2019/11/favivon.ico</url>
+	<title>mockery | Module Safari</title>
+	<link>http://35.245.164.103</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Mockery; Mock Everything In Go.</title>
+		<link>http://35.245.164.103/mockery-mock-everything-in-go/</link>
+					<comments>http://35.245.164.103/mockery-mock-everything-in-go/#comments</comments>
+		
+		<dc:creator><![CDATA[Nathaniel Blakely]]></dc:creator>
+		<pubDate>Mon, 02 Dec 2019 01:48:41 +0000</pubDate>
+				<category><![CDATA[Golang]]></category>
+		<category><![CDATA[golang]]></category>
+		<category><![CDATA[mockery]]></category>
+		<category><![CDATA[mocking]]></category>
+		<category><![CDATA[testing]]></category>
+		<guid isPermaLink="false">http://35.245.164.103/?p=658</guid>
+
+					<description><![CDATA[<p>Mockery is an awesome tool that offers the ability to generate mocks from Go interfaces. Additionally, it&#8217;s output uses the testify framework, so you can easily plug in your mocks and perform granular tests on your code. When combined with the power of a Makefile, it makes mocking a breeze. The Makefile Some people might [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/mockery-mock-everything-in-go/">Mockery; Mock Everything In Go.</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://github.com/vektra/mockery">Mockery is an awesome tool</a> that offers the ability to generate mocks from Go interfaces. Additionally, it&#8217;s output uses the <a href="http://35.245.164.103/testify-test-your-go-code/">testify</a> framework, so you can easily plug in your mocks and perform granular tests on your code. When combined with the power of a Makefile, it makes mocking a breeze. </p>
+
+
+
+<h2>The Makefile</h2>
+
+
+
+<p>Some people might be turned off by the use of a makefile. However, it is going to make this significantly more convenient, especially as your project grows.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">GOC=go
+GO111MODULE=on
+
+DIRECTORIES=$(sort $(dir $(wildcard pkg/*/*/)))
+MOCKS=$(foreach x, $(DIRECTORIES), mocks/$(x))
+
+.PHONY: all test clean-mocks mocks
+
+all: demo
+
+demo:
+	$(GOC) build -o demo
+
+test: | mocks
+	go test ./...
+
+clean-mocks:
+	rm -rf mocks
+
+mocks: $(MOCKS)
+	
+$(MOCKS): mocks/% : %
+	mockery -output=$@ -dir=$^ -all</pre>
+
+
+
+<p>This makefile takes all of the subdirectories which match the pattern &#8220;pkg/*/*&#8221; and then matches them with an output to be in the folder <code>mocks/pkg/..<em>.</em></code> .  For each of these pairs, it makes a call to mockery with the -all flag. This flag tells it to mock all of the interfaces in a directory. </p>
+
+
+
+<h2>The Go Code to Mock</h2>
+
+
+
+<p>For this example, we will have a Teller struct, which exports a method Tell. This method takes in a story and reads it chapter by chapter to an audience far and wide. Here is what the story interface and Teller struct look like.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Story interface {
+	ReadChapter(chapter int) ([]byte, error)
+	HasChapter(chapter int) bool
+}</pre>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">type Teller struct {
+}
+
+func (teller Teller) say(words []byte) {
+	//Pretend this makes it talk
+}
+
+func (teller Teller) Tell(story Story) error {
+	for i := 0; story.HasChapter(i); i++ {
+		words, err := story.ReadChapter(i)
+		if err != nil {
+			return err
+		}
+		teller.say(words)
+	}
+	return nil
+}</pre>
+
+
+
+<p>How can you make sure that the Teller reads every single chapter until there are no more in the story? You mock the story! First, you must generate the mocks with the command <code>make mocks</code> (or you can just run the test with <code>make test</code>, it knows to make the calls to mockery first). Here is our tester code for the Teller.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="14-15,17, 19, 23" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">import (
+	"testing"
+
+	demoMock "github.com/moduledemos/mockery-demo/mocks/pkg/demo"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
+)
+
+func TestTeller_Tell(t *testing.T) {
+	teller := Teller{}
+	story := new(demoMock.Story)
+	noChapters := 20
+	story.On("ReadChapter", mock.Anything).Return(
+		[]byte(":)"), nil).Times(noChapters)
+	for i := 0; i &lt; noChapters; i++ {
+		story.On("HasChapter", i).Return(true).Once()
+	}
+	story.On("HasChapter", noChapters).Return(false).Once()
+	err := teller.Tell(story)
+	assert.NoError(t, err)
+
+	story.AssertExpectations(t)
+}</pre>
+
+
+
+<p>You can see that we can mock different return values for the <code>HasChapter</code> function based on the input given to it. Additionally, you might notice <code>.Times(n)</code> or <code>.Once</code> appended to the call to <code>.On</code>. When combined with the call to <code>AssertExpectations</code> at the end, this enforces the number of times each variation is called. </p>
+
+
+
+<p>If it does not matter what the input is, you can use the global <code>mock.Anything</code> from the <a href="https://github.com/stretchr/testify">testify library</a> to match with any given input. With all of these features, I was able to create a test that ensured that all of the chapters would be read until the function HasChapter returned false. All of this, in just ~12 lines of code. If you like doing more work with less code, then I highly recommend using mockery and testify for all of your Go testing needs.</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/mockery-mock-everything-in-go/">Mockery; Mock Everything In Go.</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://35.245.164.103/mockery-mock-everything-in-go/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

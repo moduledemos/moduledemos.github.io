@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>served | Module Safari</title>
+	<atom:link href="http://35.245.164.103/tag/served/feed/" rel="self" type="application/rss+xml" />
+	<link>http://35.245.164.103</link>
+	<description>development simplified</description>
+	<lastBuildDate>Sat, 07 Dec 2019 02:17:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>http://35.245.164.103/wp-content/uploads/2019/11/favivon.ico</url>
+	<title>served | Module Safari</title>
+	<link>http://35.245.164.103</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Served; Build RESTful C++ servers</title>
+		<link>http://35.245.164.103/served/</link>
+					<comments>http://35.245.164.103/served/#respond</comments>
+		
+		<dc:creator><![CDATA[Nathaniel Blakely]]></dc:creator>
+		<pubDate>Fri, 29 Nov 2019 03:01:44 +0000</pubDate>
+				<category><![CDATA[C++]]></category>
+		<category><![CDATA[c++]]></category>
+		<category><![CDATA[cpp]]></category>
+		<category><![CDATA[http]]></category>
+		<category><![CDATA[rest]]></category>
+		<category><![CDATA[restful]]></category>
+		<category><![CDATA[served]]></category>
+		<category><![CDATA[server]]></category>
+		<guid isPermaLink="false">http://35.245.164.103/?p=440</guid>
+
+					<description><![CDATA[<p>Served is a C++ library for easy creation of highly performant web servers. It presents a clean and elegant modern C++ interface, drastically reducing the amount of boiler-plate code that would normally be needed. Overall, it looks very promising for when you want everything to just work, without compromising on performance. Now, let&#8217;s dive right [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/served/">Served; Build RESTful C++ servers</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p class="blog"><a href="https://github.com/meltwater/served" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">Served</a> is a C++ library for easy creation of highly performant web servers. It presents a clean and elegant modern C++ interface, drastically reducing the amount of boiler-plate code that would normally be needed. Overall, it looks very promising for when you want everything to just work, without compromising on performance. Now, let&#8217;s dive right into it. </p>
+
+
+
+<h2>Getting To Hello World</h2>
+
+
+
+<p>Getting started is fairly standard for a from-source installation, you can also opt to compile it into a deb or rpm package via the build flags. Running the following commands installs served on your system. This installation requires Boost 1.53 or newer, if you do not have Boost installed on your system, you can install it using your favorite package manager or by <a href="http://35.245.164.103/how-to-install-the-boost-c-libraries/">following these instructions</a>.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">git clone https://github.com/meltwater/served.git
+mkdir served/served.build &amp;&amp; cd served/served.build
+cmake ../served &amp;&amp; make
+sudo make install</pre>
+
+
+
+<p>Now, that you have it installed, it is time to build a simple webserver. This server will just give back &#8220;Hello world!&#8221; when you query against the endpoint <code>GET /hello.</code></p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="" data-enlighter-highlight="4, 6-9, 11-12" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="main.cpp" data-enlighter-group="">#include &lt;served/served.hpp>
+
+int main() {
+	served::multiplexer mux;
+
+	mux.handle("/hello")
+		.get([](served::response &amp; res, const served::request &amp; req) {
+			res &lt;&lt; "Hello world!\n";
+		});
+
+	served::net::server server("0.0.0.0", "8080", mux);
+	server.run(10);
+
+	return 0;
+}</pre>
+
+
+
+<p>To compile your program, you will need to link against the pthread, boost_system, and served shared objects, and use at least C++-11. On Linux, this would look roughly like the following.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">g++ main.cpp -o demo -std=c++17 -pthread -lboost_system -lserved</pre>
+
+
+
+<p>Just run the binary and visit the URL <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="http://localhost:8080/hello" target="_blank">http://localhost:8080/hello</a> in your browser, and you have successfully reached the hello-world. All of the code for this demo is <a href="https://github.com/moduledemos/served-demo">available on github</a>.</p>
+
+
+
+<h2>Performance</h2>
+
+
+
+<p>Let&#8217;s take a quick look at the performance of C++ Served. At only 60k, the output binary from that demo is surprising small on my system. Of course, this is not the statically linked binary size. For this benchmark, we will be using <a rel="noreferrer noopener" aria-label="Vegeta (opens in a new tab)" href="https://github.com/tsenart/vegeta" target="_blank">Vegeta</a> for load testing. </p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Requests      [total, rate, throughput]    99999, 20000.17, 19057.02
+Duration      [total, attack, wait]        5.000256833s, 4.999908146s, 348.687µs
+Latencies     [mean, 50, 90, 95, 99, max]  2.539834ms, 375.457µs, 7.240899ms, 8.184653ms, 38.421652ms, 1.691368283s
+Bytes In      [total, mean]                1238770, 12.39
+Bytes Out     [total, mean]                0, 0.00
+Success       [ratio]                      95.29%
+Status Codes  [code:count]                 0:4709  200:95290  
+
+</pre>
+
+
+
+<p>On my machine (Intel(R) Core(TM) i9-9900K CPU @ 3.60GHz 16 threads), the basic hello world server was able to handle around 19,000 requests per second! Additionally, it was able to maintain relatively low CPU usage during this attack, using only ~30% of the capacity available to it. </p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="false" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">Requests      [total, rate, throughput]    150000, 30000.10, 14094.09
+Duration      [total, attack, wait]        7.948649187s, 4.999982507s, 2.94866668s
+Latencies     [mean, 50, 90, 95, 99, max]  9.756488ms, 5.137985ms, 7.529834ms, 7.989994ms, 51.273487ms, 6.782636245s
+Bytes In      [total, mean]                1456377, 9.71
+Bytes Out     [total, mean]                0, 0.00
+Success       [ratio]                      74.69%
+Status Codes  [code:count]                 0:37971  200:112029 </pre>
+
+
+
+<p>As the request rate increases above 20k, the performance started to degrade. Here, it seems like 20k requests per second is the sweet spot. Despite this, the performance of the library is very satisfactory under the given load. The majority of requests took under 1ms when it was under the 20k stress test. This should be more than enough to meet the needs of all but the most extreme demands. </p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/served/">Served; Build RESTful C++ servers</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://35.245.164.103/served/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

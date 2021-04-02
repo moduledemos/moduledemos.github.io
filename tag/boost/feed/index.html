@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>boost | Module Safari</title>
+	<atom:link href="http://35.245.164.103/tag/boost/feed/" rel="self" type="application/rss+xml" />
+	<link>http://35.245.164.103</link>
+	<description>development simplified</description>
+	<lastBuildDate>Sat, 30 Nov 2019 21:15:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>http://35.245.164.103/wp-content/uploads/2019/11/favivon.ico</url>
+	<title>boost | Module Safari</title>
+	<link>http://35.245.164.103</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>How to install the Boost C++ libraries</title>
+		<link>http://35.245.164.103/how-to-install-the-boost-c-libraries/</link>
+					<comments>http://35.245.164.103/how-to-install-the-boost-c-libraries/#respond</comments>
+		
+		<dc:creator><![CDATA[Nathaniel Blakely]]></dc:creator>
+		<pubDate>Sat, 30 Nov 2019 21:14:29 +0000</pubDate>
+				<category><![CDATA[C++]]></category>
+		<category><![CDATA[Tutorials]]></category>
+		<category><![CDATA[boost]]></category>
+		<category><![CDATA[c++]]></category>
+		<category><![CDATA[cpp]]></category>
+		<category><![CDATA[linux]]></category>
+		<guid isPermaLink="false">http://35.245.164.103/?p=590</guid>
+
+					<description><![CDATA[<p>The Boost C++ libraries are a set of free peer-reviewed C++ libraries. They are intended to be useful for a wide variety of applications and portable. Boost just makes life easier, here is how to install it on Linux. Installing Boost using a package manager The easiest way to install Boost is with your built-in [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/how-to-install-the-boost-c-libraries/">How to install the Boost C++ libraries</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The Boost C++ libraries are a set of free peer-reviewed <a href="http://35.245.164.103/category/cpp">C++</a> libraries. They are intended to be useful for a wide variety of applications and portable. Boost just makes life easier, here is how to install it on Linux. </p>
+
+
+
+<h2>Installing Boost using a package manager</h2>
+
+
+
+<p>The easiest way to install Boost is with your built-in package manager. It takes care of the installation of all of the dependencies and is more likely to be using a very stable version of the library. Also, there is the added benefit of it being easy to remove if you no longer want it. </p>
+
+
+
+<h3>Apt (Debian, Ubuntu, Pop OS, etc)</h3>
+
+
+
+<p>On most Debian based systems, you can install all of the Boost libraries with a single command. </p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apt-get install libboost-all-dev</pre>
+
+
+
+<h3>DNF (Fedora, etc)</h3>
+
+
+
+<p>The newer versions of Fedora now use Dandified Yum, instead of just regular yum. </p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">dnf install boost-devel</pre>
+
+
+
+<h3>Yum (Centos, older versions of Fedora, etc)</h3>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">yum install boost-devel</pre>
+
+
+
+<h2>Manual Installation</h2>
+
+
+
+<p>If you require a different version of it than the one that is provided by your package manager, you can easily compile and install it manually. </p>
+
+
+
+<h3>Dependencies</h3>
+
+
+
+<p>Boost has very few dependencies. You mainly need just a C++ compiler and make. </p>
+
+
+
+<ul><li>C++ compiler (g++, clang++, etc)</li><li>make</li></ul>
+
+
+
+<h3>Installation</h3>
+
+
+
+<p>With that out of the way, let&#8217;s get to the installation, do keep in mind that you will need to set the change the first few environment variables to what you would like them to be. </p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">export MAJOR_VERSION=1
+export MINOR_VERSION=70
+export PATCH_VERSION=0
+wget https://dl.bintray.com/boostorg/release/${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}/source/boost_${MAJOR_VERSION}_${MINOR_VERSION}_${PATCH_VERSION}.tar.gz
+tar -xzf boost_${MAJOR_VERSION}_${MINOR_VERSION}_${PATCH_VERSION}.tar.gz
+cd boost_${MAJOR_VERSION}_${MINOR_VERSION}_${PATCH_VERSION}
+./bootstrap.sh
+./b2 install -j$(nproc)</pre>
+
+
+
+<p>You should now have successfully installed Boost on your machine. For more details, I suggest taking a look at the <a href="https://www.boost.org/doc/libs/1_66_0/more/getting_started/unix-variants.html">official boost documentation</a></p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/how-to-install-the-boost-c-libraries/">How to install the Boost C++ libraries</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://35.245.164.103/how-to-install-the-boost-c-libraries/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

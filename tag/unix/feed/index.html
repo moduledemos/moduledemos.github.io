@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>unix | Module Safari</title>
+	<atom:link href="http://35.245.164.103/tag/unix/feed/" rel="self" type="application/rss+xml" />
+	<link>http://35.245.164.103</link>
+	<description>development simplified</description>
+	<lastBuildDate>Sat, 30 Nov 2019 19:27:18 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.3</generator>
+
+<image>
+	<url>http://35.245.164.103/wp-content/uploads/2019/11/favivon.ico</url>
+	<title>unix | Module Safari</title>
+	<link>http://35.245.164.103</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Learn how to set ulimit on Linux</title>
+		<link>http://35.245.164.103/linux-ulimits/</link>
+					<comments>http://35.245.164.103/linux-ulimits/#respond</comments>
+		
+		<dc:creator><![CDATA[Nathaniel Blakely]]></dc:creator>
+		<pubDate>Sat, 30 Nov 2019 19:27:17 +0000</pubDate>
+				<category><![CDATA[Tutorials]]></category>
+		<category><![CDATA[limit]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[server]]></category>
+		<category><![CDATA[ubuntu]]></category>
+		<category><![CDATA[ulimit]]></category>
+		<category><![CDATA[unix]]></category>
+		<guid isPermaLink="false">http://35.245.164.103/?p=565</guid>
+
+					<description><![CDATA[<p>Often times you will need to increase the maximum number of file descriptors in order to achieve proper functionality of your application. Perhaps you have a database or have run into the &#8220;Too many open files&#8221; error. In this tutorial, we will go over increasing this value and other ulimits. But first, what is a [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/linux-ulimits/">Learn how to set ulimit on Linux</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Often times you will need to increase the maximum number of file descriptors in order to achieve proper functionality of your application. Perhaps you have a database or have run into the &#8220;Too many open files&#8221; error. In this tutorial, we will go over increasing this value and other ulimits. But first, what is a Linux ulimit? </p>
+
+
+
+<h2>What is a Linux ulimit?</h2>
+
+
+
+<p>A ulimit or user limit in Linux is a restriction placed on a user&#8217;s access to certain resources. You can use the command <code>ulimit -a</code> to view them, this will give you a list of the ulimit values you can set, as well as their value. It is important to note that there are two types of limits, soft and hard. </p>
+
+
+
+<h3>Hard Limits</h3>
+
+
+
+<p>A hard limit is the maximum allowed to the user. It is set by the root user and acts as the hard ceiling for that value. The user will be unable to have a limit higher than this unless it is changed by the root user. There are a few ways to update this value, but the most common way is by updating the /etc/security/limits.conf file. In most situations, it is best to not update this value.</p>
+
+
+
+<h3>Soft Limits</h3>
+
+
+
+<p>A soft limit is the current maximum for the user. The user is able to change this at any time, either through setrlimit(2) or the ulimit command. Often times, you will only need to set this value, as very few situations call for resources above the hard limit.</p>
+
+
+
+<h2>Permanently Updating Limits</h2>
+
+
+
+<p>The best method for permanently updating soft limits and hard limits is via the<em> /etc/security/limits.conf </em>file. In this file, you can include the new soft limit defaults for a user, or update the hard limits. The format in which you insert your updates into this file is simple, it is just <code>&lt;domain> &lt;type> &lt;item> &lt;value></code>. So, if you wanted to update the default file limit for the user apache, it would look like this.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">apache soft nofile 5000</pre>
+
+
+
+<p>Now, all you would have to do is reboot the system, and the user apache&#8217;s file descriptor limit would default to 5000.</p>
+
+
+
+<h2>Temporarily Updating Limits</h2>
+
+
+
+<p>The easiest way to temporarily update a soft limit is with the ulimit command. If you wanted to set your file descriptor limit to 5000 for the duration of your shell session, you can use this command.</p>
+
+
+
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="" data-enlighter-highlight="" data-enlighter-linenumbers="" data-enlighter-lineoffset="" data-enlighter-title="" data-enlighter-group="">ulimit -S -n 5000</pre>
+
+
+
+<p>The -S flag signals that you are temporarily updating the soft limit value, and the -n flag states you wish to change the value for file-descriptors. You can also update hard limits using this method, just swap out the -S with -H. However, you can only set a lower value.</p>
+<p>The post <a rel="nofollow" href="http://35.245.164.103/linux-ulimits/">Learn how to set ulimit on Linux</a> appeared first on <a rel="nofollow" href="http://35.245.164.103">Module Safari</a>.</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>http://35.245.164.103/linux-ulimits/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
