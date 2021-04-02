@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 
-Sitemap: http://35.245.164.103/wp-sitemap.xml
+Sitemap: https://modulesafari.com/wp-sitemap.xml
